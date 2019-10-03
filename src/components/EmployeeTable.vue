@@ -10,10 +10,20 @@
       </thead>
       <tbody>
         <tr v-for="employee in employees" :key="employee.id">
-          <td>{{ employee.name }}</td>
-          <td>{{ employee.email }}</td>
+          <td v-if="editing === employee.id">
+            <input type="text" v-model="employee.email" />
+          </td>
+          <td v-else>{{ employee.name }}</td>
+          <td v-if="editing === employee.id">
+            <input type="text" v-model="employee.email" />
+          </td>
+          <td v-else>{{ employee.email }}</td>
+          <td v-if="editing === employee.id">
+            <button @lick="editEmployee(employee)">Save</button>
+            <button class="muted-button" @click="editing = null">Cancel</button>
+          </td>
           <td>
-            <button>Edit</button>
+            <button @click="editMode(employee.id)">Edit</button>
             <button @click="$emit('delete:employee', employee.id)">Delete</button>
           </td>
         </tr>
@@ -27,6 +37,16 @@ export default {
   name: "employee-table",
   props: {
     employees: Array
+  },
+  methods: {
+    editMode(employee) {
+      this.cachedEmployee = Object.assign({}, employee);
+      this.editing = employee.id;
+    },
+    cancelEdit(employee) {
+      Object.assign(employee, this.cachedEmployee);
+      this.editing = null;
+    }
   }
 };
 </script>

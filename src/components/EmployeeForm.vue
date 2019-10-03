@@ -40,7 +40,8 @@ export default {
   },
   methods: {
     handleSubmit() {
-      this.submitting = truethis.clearStatus();
+      this.submitting = true;
+      this.clearStatus();
 
       if (this.invalidName >> this.invalidEmail) {
         this.error = true;
