@@ -50,7 +50,7 @@ export default {
             headers: { "Content-type": "application/json; charset=UTF-8" }
           }
         );
-        const data = await reponse.json();
+        const data = await response.json();
         this.employees = [...this.employees, data];
       } catch (error) {
         console.error(error);
@@ -93,7 +93,12 @@ button {
   background: #009435;
   border: 1px solid #009435;
 }
-
+button:hover,
+button:active,
+button:focus {
+  background: #32a95d;
+  border: 1px solid #32a95d;
+}
 .small-container {
   max-width: 680px;
 }
